@@ -1,9 +1,10 @@
 import SummarizerInput from "@/components/SummarizerInput";
 import SummarizerOutput from "@/components/SummarizerOutput";
-import { Slider } from "./components/RangeSlider";
+
 import RewrittenHistory from "./components/RewrittenHistory";
 
 export default function Home() {
+
   return (
     <main className="p-4 sm:p-8 min-h-screen bg-slate-100">
      <section>
