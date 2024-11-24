@@ -12,9 +12,9 @@ const SummarizerOutput = ({ text = '' }: { text: string }) => {
         <div className="flex-1">
           <WordCount text={text} />
         </div>
-        <Download className="mr-2 cursor-pointer" />
-        <Copy className="mr-2 cursor-pointer" />
-        <Trash2 className="mr-2 cursor-pointer" />
+        <Download className="mr-2 cursor-pointer"  color="gray"/>
+        <Copy className="mr-2 cursor-pointer" color="gray"/>
+        <Trash2 className="mr-2 cursor-pointer"  color="red" />
       </div>
     </div>
   )
