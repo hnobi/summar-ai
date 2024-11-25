@@ -18,21 +18,20 @@ const CopyButton: React.FC<{ content: string }> = ({ content }) => {
   };
 
   return (
-    <button
-      onClick={handleCopy}
-      className="flex items-center py-2 px-4 rounded-lg transition"
+    <div
+      className="flex items-center py-2 px-2 rounded-lg transition "
     >
      {copied ? (
         <span className="flex">
           <span className="text-xs text-primary mr-0.5">Copied</span>
-          <CopyCheck size={20} color="#753fea"  />
+          <CopyCheck size={20}  color="#753fea"/>
         </span>
       ) : (
-        <>
-          <Copy size={20} className="cursor-pointer hover:text-primary" color="gray" />
-        </>
+        <button className="hover:text-primary" onClick={handleCopy}>
+          <Copy size={20} className="cursor-pointer" />
+        </button>
       )}
-    </button>
+    </div>
   );
 };
 

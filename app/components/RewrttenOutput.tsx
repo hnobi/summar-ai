@@ -32,10 +32,14 @@ const RewrttenOutput = ({ text }: { text: string }) => {
           </div>
 
         </div>
-        <Download className="cursor-pointer"
-          size={20}
-          color="gray"
-          onClick={() => downloadTexFile("rewrite.txt", newRewritten.rewrittenText)} />
+        <button
+          className=" hover:text-primary"
+          onClick={ () => downloadTexFile("rewrite.txt", newRewritten.rewrittenText)}
+        >
+          <Download
+            size={20}/>
+        </button>
+
         <CopyButton content={newRewritten.rewrittenText} />
         <Trash2
           size={20}
