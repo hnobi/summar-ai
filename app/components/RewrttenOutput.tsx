@@ -1,6 +1,6 @@
 "use client"
 
-import { Download, Trash2, Copy } from "lucide-react";
+import { Download, Trash2 } from "lucide-react";
 import WordCount from "./WordCount";
 import { downloadTexFile } from "@/utils/download";
 import CopyButton from "./CopyButton";
