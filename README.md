@@ -2,6 +2,10 @@
 
 Rewrite AI is a Next.js-based application that helps users rewrite sentences with customizable tones. The project provides features like history tracking, explanation for improvements, and options for downloading and managing rewritten sentences.
 
+The application is deployed and accessible at:
+
+Rewrite AI - [Live Application](https://rewrite-ai.netlify.app)
+
 
 ## Getting Started
 
