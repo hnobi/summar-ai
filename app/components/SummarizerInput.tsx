@@ -2,11 +2,14 @@
 
 import React, { ChangeEvent, useState } from "react";
 import WordCount from "./WordCount";
+import { useSummaryContext } from "@/contexts/summary";
+import { Loader2 } from "lucide-react"
 
 const SummarizerInput = () => {
   const [text, setText] = useState('');
-  const [summary, setSummary] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const {addSummary, tone, len} = useSummaryContext()
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
@@ -14,6 +17,8 @@ const SummarizerInput = () => {
   const handleClear = () => {
     setText('');
   };
+
+
   const handleSummarize = async () => {
     if (!text) return;
 
@@ -24,7 +29,7 @@ const SummarizerInput = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text, tone: 'formal'}),
+        body: JSON.stringify({ text, tone, length: len}),
       });
 
       if (!response.ok) {
@@ -32,7 +37,7 @@ const SummarizerInput = () => {
       }
 
       const data = await response.json();
-      setSummary(data.summary);
+      addSummary(text, data.summary_text)
     } catch (error) {
       console.error(error);
     } finally {
@@ -40,7 +45,6 @@ const SummarizerInput = () => {
     }
   };
 
-  console.log(summary, '--------------------------', loading);
   
   return (
     <div className="w-full sm:w-1/2 sm:h-full h-1/2 sm:border-r-[1px] bg-white">
@@ -60,10 +64,12 @@ const SummarizerInput = () => {
           Clear
         </button>
         <button
-          className="bg-primary hover:bg-opacity-90 text-white text-sm md:text-md font-semibold rounded-3xl px-6 py-1"
+          className= "flex items-center bg-primary hover:bg-opacity-90 text-white text-sm md:text-md font-semibold rounded-3xl px-6 py-1"
           onClick={handleSummarize}
+          disabled={loading}
         >
-          Summarize
+          { loading &&  <Loader2 className="animate-spin mr-2" size={18}/>}
+         {loading ?  "Summarizing...": "Summarize"}
         </button>
       </div>
     </div>

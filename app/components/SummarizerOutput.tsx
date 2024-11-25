@@ -1,7 +1,11 @@
+"use client"
+
 import { Download, Trash2, Copy } from "lucide-react";
 import WordCount from "./WordCount";
+import { downloadTexFile } from "@/utils/download";
+import CopyButton from "./CopyButton";
 
-const SummarizerOutput = ({ text = '' }: { text: string }) => {
+const SummarizerOutput = ({ text }: { text: string }) => {
 
   return (
     <div className="w-full sm:w-1/2 sm:h-full h-1/2 bg-white mt-10 sm:mt-0">
@@ -12,9 +16,12 @@ const SummarizerOutput = ({ text = '' }: { text: string }) => {
         <div className="flex-1">
           <WordCount text={text} />
         </div>
-        <Download className="mr-2 cursor-pointer"  color="gray"/>
-        <Copy className="mr-2 cursor-pointer" color="gray"/>
-        <Trash2 className="mr-2 cursor-pointer"  color="red" />
+        <Download className="cursor-pointer"
+          size={20} 
+          color="gray"
+          onClick={() => downloadTexFile("summary.txt", text)} />
+          <CopyButton content={text} />
+        <Trash2 size={20}  className="cursor-pointer" color="red" />
       </div>
     </div>
   )
