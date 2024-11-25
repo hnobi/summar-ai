@@ -1,20 +1,19 @@
 "use client"
 
-import SummarizerInput from "@/components/SummarizerInput";
-import SummarizerOutput from "@/components/SummarizerOutput";
+import RewrttenInput from "@/components/RewrttenInput";
+import RewrttenOutput from "@/components/RewrttenOutput";
 import RewrittenHistory from "@/components/RewrittenHistory";
-import { useSummaryContext } from "@/contexts/summary";
+import { useRewrittenContext } from "@/contexts/rewritten";
 
 export default function Home() {
   const {
-    newSummary,
-    summaries,
+    newRewritten,
+    rewrittens,
     handleTonechange,
     tone,
     len,
     handleLengthchange,
-  } = useSummaryContext()
-  console.log({ newSummary, summaries });
+  } = useRewrittenContext()
 
 
   return (
@@ -45,12 +44,12 @@ export default function Home() {
           </div>
         </div>
         <div className="rounded-lg border border-[#f1f5f9] bg-slate-100 sm:bg-white-300 flex flex-col sm:flex-row max-w-[1400px] mx-auto">
-          <SummarizerInput />
-          <SummarizerOutput text={newSummary.summaryText} />
+          <RewrttenInput />
+          <RewrttenOutput text={newRewritten.rewrittenText} />
         </div>
       </section>
       <section>
-        <RewrittenHistory summaries={summaries} />
+        <RewrittenHistory rewrittens={rewrittens} />
       </section>
     </main>
   );

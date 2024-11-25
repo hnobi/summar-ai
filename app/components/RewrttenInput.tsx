@@ -2,13 +2,13 @@
 
 import React, { ChangeEvent, useState } from "react";
 import WordCount from "./WordCount";
-import { useSummaryContext } from "@/contexts/summary";
+import { useRewrittenContext } from "@/contexts/rewritten";
 import { Loader2 } from "lucide-react"
 
-const SummarizerInput = () => {
+const RewrttenInput = () => {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
-  const {addSummary, tone, len} = useSummaryContext()
+  const {addRewritten, tone, len} = useRewrittenContext()
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
@@ -19,12 +19,12 @@ const SummarizerInput = () => {
   };
 
 
-  const handleSummarize = async () => {
+  const handleRewritten = async () => {
     if (!text) return;
 
     setLoading(true);
     try {
-      const response = await fetch('/api/summarize', {
+      const response = await fetch('/api/rewrite', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,11 +33,11 @@ const SummarizerInput = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Summarization failed');
+        throw new Error('Rewrite failed');
       }
 
       const data = await response.json();
-      addSummary(text, data.summary_text)
+      addRewritten(text, data.rewritten_text, data.explaination)
     } catch (error) {
       console.error(error);
     } finally {
@@ -65,15 +65,15 @@ const SummarizerInput = () => {
         </button>
         <button
           className= "flex items-center bg-primary hover:bg-opacity-90 text-white text-sm md:text-md font-semibold rounded-3xl px-6 py-1"
-          onClick={handleSummarize}
+          onClick={handleRewritten}
           disabled={loading}
         >
           { loading &&  <Loader2 className="animate-spin mr-2" size={18}/>}
-         {loading ?  "Summarizing...": "Summarize"}
+         {loading ?  "Rewriting...": "Rewrite"}
         </button>
       </div>
     </div>
   );
 };
 
-export default SummarizerInput;
+export default RewrttenInput;

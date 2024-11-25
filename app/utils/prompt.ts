@@ -1,12 +1,12 @@
 
 export type Length = 'shorter' | 'concise' | 'longer';
 
-export const generateSummarizationPrompt = (
+export const generateRewritetionPrompt = (
     text: string,
     tone?: string,
     length?: Length
   ): string => {
-    let prompt = `Summarize the following text: ${text}`
+    let prompt = `Rewrite the following text: ${text}`
   
     if (length) {
       const lengthModifiers = {

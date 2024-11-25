@@ -1,17 +1,17 @@
-import { SummaryItem } from "@/contexts/summary";
+import { RewrittenItem } from "@/contexts/rewritten";
 
-export const savedSummaries = (summaries: SummaryItem[]) => {
-    const summaryHistory = JSON.stringify(summaries);
-    localStorage.setItem('summaryHistory', summaryHistory)
+export const saveRewrittens = (rewrittens: RewrittenItem[]) => {
+    const rewriteHistory = JSON.stringify(rewrittens);
+    localStorage.setItem('rewriteHistory', rewriteHistory)
 }
 
-export const getSavedSummaries = (): SummaryItem[] => {
+export const getSavedRewrites = (): RewrittenItem[] => {
     if (typeof window === 'undefined') {
         return [];
     }
-    const summaryHistory = localStorage.getItem('summaryHistory') || ""
-     if(summaryHistory.length > 0){
-        return JSON.parse(summaryHistory);
+    const rewriteHistory = localStorage.getItem('rewriteHistory') || ""
+     if(rewriteHistory.length > 0){
+        return JSON.parse(rewriteHistory);
      }
   
     return []

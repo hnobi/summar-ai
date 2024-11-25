@@ -1,5 +1,5 @@
-import { summarize } from '@/actions/openai';
-import { generateSummarizationPrompt, Length } from '@/utils/prompt';
+import { rewriteService } from '@/actions/openai';
+import { Length } from '@/utils/prompt';
 import { NextRequest, NextResponse } from 'next/server'
 
 type RequestBody = {
@@ -9,7 +9,6 @@ type RequestBody = {
 }
 
 /**
- *
  *
  * @param {string} text
  * @param {string} [tone]
@@ -30,17 +29,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const prompt = generateSummarizationPrompt(text, tone, length)
-    const summary = await summarize(prompt)
+    const rewrite = await rewriteService(text, tone, length)
 
-    if (!summary) {
+    if (!rewrite) {
       return NextResponse.json(
-        { error: 'Summarization failed' },
+        { error: 'Rewriting failed' },
         { status: 500 }
       )
     }
 
-    return NextResponse.json(summary )
+    return NextResponse.json(rewrite )
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
     return NextResponse.json({ error: errorMessage }, { status: 500 })
