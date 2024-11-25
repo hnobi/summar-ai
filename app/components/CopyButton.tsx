@@ -11,7 +11,6 @@ const CopyButton: React.FC<{ content: string }> = ({ content }) => {
     try {
       await navigator.clipboard.writeText(content);
       setCopied(true);
-
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy text: ", err);
