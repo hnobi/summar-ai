@@ -24,7 +24,7 @@ export default function Home() {
             <label className="mr-2 font-semibold" htmlFor="length">Length: </label>
             <select
               name="length"
-              value={tone}
+              value={len}
               onChange={(e) => handleLengthchange(e.target.value)}
               className="p-2  border-0 rounded-lg outline-none w-full"
             >
@@ -38,6 +38,7 @@ export default function Home() {
             <label className="mr-1 font-semibold" htmlFor="tone">Tone:</label>
             <input
               name='tone'
+              value={tone}
               onChange={(e) => handleTonechange(e.target.value)}
               placeholder=" e.g formal, casual, persuasive"
               className="px-2 py-1 outline-none flex-1" />

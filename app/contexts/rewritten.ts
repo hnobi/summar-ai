@@ -6,18 +6,21 @@ export interface RewrittenItem {
   originalText: string;
   rewrittenText: string;
   date: string;
-  explaination: string;
+  explanation: string;
 }
 
 export interface ReContextType {
   rewrittens: RewrittenItem[];
   newRewritten: RewrittenItem 
-  addRewritten: (originalText: string, rewrittenText: string, explaination?: string) => void;
+  addRewritten: (originalText: string, rewrittenText: string, explanation?: string) => void;
   deleteRewritten: (id: string) => void;
   tone: string;
-  handleTonechange: (tone: string) => void;
-  handleLengthchange: (length: string) => void;
   len: string;
+  text: string;
+  handleTonechange: (tone: string) => void;
+  handleTextChange: (text: string) => void;
+  handleLengthchange: (length: string) => void;
+  handleClear: () => void;
 }
 
 export const RewrittenContext = createContext<ReContextType | undefined>(undefined);

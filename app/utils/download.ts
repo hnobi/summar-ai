@@ -4,6 +4,9 @@
  * @param {string} content
  */
 export const downloadTexFile = (filename: string, content: string) => {
+  if(!content){
+    return;
+  }
     const blob = new Blob([content], { type: "text/plain" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);

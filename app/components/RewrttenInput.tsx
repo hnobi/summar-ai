@@ -1,22 +1,13 @@
 'use client';
 
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import WordCount from "./WordCount";
 import { useRewrittenContext } from "@/contexts/rewritten";
 import { Loader2 } from "lucide-react"
 
 const RewrttenInput = () => {
-  const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
-  const {addRewritten, tone, len} = useRewrittenContext()
-
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  };
-
-  const handleClear = () => {
-    setText('');
-  };
+  const {addRewritten, tone, len, text, handleTextChange, handleClear} = useRewrittenContext()
 
 
   const handleRewritten = async () => {
@@ -37,7 +28,7 @@ const RewrttenInput = () => {
       }
 
       const data = await response.json();
-      addRewritten(text, data.rewritten_text, data.explaination)
+      addRewritten(text, data.rewritten_text, data.explanation)
     } catch (error) {
       console.error(error);
     } finally {
@@ -52,7 +43,7 @@ const RewrttenInput = () => {
         className="h-[200px] sm:h-[350px] w-full outline-none px-4 py-4 resize-none"
         placeholder="Enter text here ..."
         rows={10}
-        onChange={handleChange}
+        onChange={(e) => handleTextChange(e.target.value)}
         value={text}
       />
       <div className="flex items-center px-4 py-2 border-t-[1px]">
@@ -64,7 +55,10 @@ const RewrttenInput = () => {
           Clear
         </button>
         <button
-          className= "flex items-center bg-primary hover:bg-opacity-90 text-white text-sm md:text-md font-semibold rounded-3xl px-6 py-1"
+          className= {`flex items-center hover:bg-opacity-90 text-white text-sm md:text-md font-semibold rounded-3xl px-6 py-1 ${
+              !text ? "bg-gray-400 cursor-not-allowed"
+              : "bg-primary hover:bg-opacity-90"
+          }`}
           onClick={handleRewritten}
           disabled={loading}
         >
